@@ -1,0 +1,7 @@
+<Page ux:Name="SignUp">
+<Panel ux:Class="thepolishrack.SignUp">
+
+<Text Value="sign up page"></Text>
+
+</Panel>
+</Page>
