@@ -17,6 +17,14 @@
 
     <Navigator DefaultPath="login">
 
+    <SplashPage ux:Template="splash" />
+
+    	<Page ux:Class="SplashPage">
+		
+		<Text> Splash. Splash. Splash.</Text>
+
+		</Page>
+
         <Page ux:Template="login">
             <Text Alignment="Center">Log In page.</Text>
         </Page>
