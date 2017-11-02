@@ -14,8 +14,6 @@
 
 <DockPanel>
 
-    <JavaScript File="MainView.js" />
-
     <StatusBarBackground Dock="Top"/>
     <BottomBarBackground Dock="Bottom"/>
 
@@ -60,7 +58,7 @@
     </Navigator>
 
     <Grid Dock="Bottom" Columns="1*,1*">
-        <Button Text="Log In Page" Padding="20" Clicked="{gotologin}" />
+        <Button Text="Home" Padding="20" Clicked="{gotohome}" />
         <Button Text="Sign Up Page" Padding="20" Clicked="{gotosignup}" />
         <Button Text="Scanner" Padding="20" Clicked="{gotoscanner}" />
         <Button Text="My Polish Rack" Padding="20" Clicked="{gotomyrack}" />
