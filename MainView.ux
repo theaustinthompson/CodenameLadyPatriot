@@ -86,21 +86,7 @@
                 <Panel ux:Name="loggedInView" Opacity="0" IsEnabled="false">
                     <Grid RowCount="2">
                         <DockPanel Background="#ddd" Row="1">
-                            <StackPanel>
-                                <Each Items="{items}">
-                                    <TaskItem>
-                                        <OnUserEvent EventName="ToggleLoggedIn">
-                                            <Toggle Target="animateItem" />
-                                        </OnUserEvent>
-                                        <WhileTrue ux:Name="animateItem">
-                                            <Change trans.Y="0" Duration="0.8" Delay="{delay}" Easing="QuadraticInOut"/>
-                                            <Change scaling.Factor="1" Duration="0.6" Delay="{delay}" Easing="QuadraticInOut" />
-                                        </WhileTrue>
-                                        <Translation ux:Name="trans" Y="-0.5" RelativeTo="Size" />
-                                        <Scaling ux:Name="scaling" Factor="1.2" />
-                                    </TaskItem>
-                                </Each>
-                            </StackPanel>
+                           
 
                          <Grid Dock="Top" >
                             <Button Text="Home" Padding="20" Clicked="{gotohome}" />
@@ -115,17 +101,15 @@
                             <Image Layer="Background" File="assets/images/headerhome.png" Color="#ddd" StretchMode="UniformToFill">
                                 <Scaling ux:Name="headerScaling" Factor="1.4" />
                             </Image>
-                            <Text ux:Name="goodMorningText" Value="Good Morning!" FontSize="32" Alignment="Center" Color="#fff" Opacity="0"/>
-                            <Circle  ux:Name="profile" Width="100" Height="100" Opacity="0">
-                                <ImageFill File="assets/images/avatarhome.png" WrapMode="ClampToEdge"/>
-                                <Circle Alignment="TopRight" Width="25" Height="25" Color="#0ff" Margin="5">
-                                    <Text Value="3" FontSize="10" Alignment="Center" Color="#fff" />
-                                </Circle>
+                            <Text ux:Name="goodMorningText" Value="Wecome!" FontSize="32" Alignment="Center" Color="#fff" Opacity="0"/>
+                            <Circle  ux:Name="profile" Width="250" Height="250" Opacity="0">
+                                <ImageFill File="assets/images/logo.png" WrapMode="ClampToEdge"/>
+                               
                                 <Scaling ux:Name="profileScaling" Factor="0.1"/>
                             </Circle>
                             <Grid ux:Name="monthPanel" ColumnCount="3" Padding="20,0" Opacity="0">
                                 <Image File="assets/images/arrow.png" Width="20" Height="20" Alignment="Left"/>
-                                <Text Value="Where do you want to go?" Alignment="Center" Color="#fff"/>
+                                <Text Value="What now" Alignment="Center" Color="#fff"/>
                                 <Image File="assets/images/arrow.png" Width="20" Height="20" Alignment="Right">
                                     <Rotation Degrees="180" />
                                 </Image>
@@ -221,6 +205,7 @@
 
         <Page ux:Template="signup">
             <Text Alignment="Center">Sign Up Page.</Text>
+            
         </Page>
 
         <Page ux:Template="home">
