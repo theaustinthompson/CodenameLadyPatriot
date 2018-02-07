@@ -1,224 +1,31 @@
 <App>
 
-<JavaScript>
-    module.exports = {
-        gotologin: function() { router.goto("login"); },
-        gotosignup: function() { router.goto("signup"); },
-        gotoscanner: function() { router.goto("scanner"); },
-        gotohome: function() { router.goto("home"); },
-        gotomyrack: function() { router.goto("myrack"); }
-    };
-</JavaScript>
-
 <Router ux:Name="router" />
 
 <DockPanel>
-
-   
-
-	<!-- Navigation Structure -->
 
     <Navigator DefaultPath="login">
 
     <SplashPage ux:Template="splash" />
 
-    	<Page ux:Class="SplashPage">
-		
-		<Text> Splash. Splash. Splash.</Text>
-
-		</Page>
+    	<Page ux:Class="SplashPage"></Page>
 
         <Page ux:Template="login">
-           
-    <Panel>
-
-        <Panel ux:Name="transitionScaleGuide" Width="500%" Height="500%" Alignment="Center" HitTestMode="None" BoxSizing="FillAspect" Aspect="1" />
-
-        <DockPanel ux:Class="TaskItem" Height="80" Margin="1" Background="#fff" Padding="15,20">
-            <Image Width="50" Height="50" Dock="Left" File="{image}" />
-            <Grid RowCount="2" Margin="40,0">
-                <Text Value="{text}" />
-                <Text Value="{timeSlot}" Color="#999"/>
-            </Grid>
-        </DockPanel>
-
-        <UserEvent Name="ToggleLoggedIn" />
-        <DockPanel>
-            <Panel>
-                <JavaScript File="MainView.js" />
-
-                <Panel ux:Name="plusButton" Width="60" Height="60" Alignment="BottomRight" Margin="20" Opacity="0" IsEnabled="false">
-                    <Panel ux:Name="cross">
-                        <Rectangle Width="30%" Height="2" Color="#fff"/>
-                        <Rectangle Height="30%" Width="2" Color="#fff"/>
-                    </Panel>
-
-                    <WhileTrue ux:Name="showPlusButton">
-                        <Change plusButtonScaling.Factor="1" Duration="0.4" Easing="CircularInOut" DurationBack="0"/>
-                    </WhileTrue>
-
-                    <Scaling ux:Name="plusButtonScaling" Factor="0.1"/>
-                    
-                    <Clicked>
-                        <Toggle Target="loading" Delay="0.2" />
-                        <RaiseUserEvent EventName="ToggleLoggedIn" Delay="0.3"/>
-                        <Change scalePlusButton.Value="true" />
-                        <Nothing Duration="0.8" />
-                    </Clicked>
-
-                    <WhileTrue ux:Name="scalePlusButton">
-                        <Change cross.Opacity="0" Duration="0.1" />
-                        <Scale Target="plusButtonTransitionCircle" Factor="2.5" RelativeTo="SizeFactor" RelativeNode="transitionScaleGuide"
-                               Duration="0.6" Easing="ExponentialInOut" DurationBack="0" />
-                        <Change plusButtonTranslation.Y="-0.5" Duration="0.6" Easing="ExponentialInOut" DurationBack="0"/>
-                        <Change plusButtonTranslation.X="-0.5" Duration="0.6" Easing="ExponentialInOut" DurationBack="0"/>
-                    </WhileTrue>
-
-                    <Translation ux:Name="plusButtonTranslation" RelativeTo="ParentSize" />
-
-                    <Circle ux:Name="plusButtonTransitionCircle" Color="#FF3366" Layer="Background" Width="236" Height="236">
-                        <Scaling ux:Name="plusButtonCircleScaling" Factor="0.25" />
-                    </Circle>
-
-                    <Circle ux:Name="plusButtonBackgroundCircle" Color="#FF3366" />
-                </Panel>
-
-                <Panel ux:Name="loggedInView" Opacity="0" IsEnabled="false">
-                    <Grid RowCount="2">
-                        <DockPanel Background="#ddd" Row="1">
-                           
-
-                         <Grid Dock="Top" >
-                            <Button Text="Home" Padding="20" Clicked="{gotohome}" />
-                            <Button Text="Sign Up Page" Padding="20" Clicked="{gotosignup}" />
-                            <Button Text="Scanner" Padding="20" Clicked="{gotoscanner}" />
-                            <Button Text="My Polish Rack" Padding="20" Clicked="{gotomyrack}" />
-                        </Grid>
-                        
-                        </DockPanel>
-
-                        <Grid Rows="1*,auto,100" Row="0">
-                            <Image Layer="Background" File="assets/images/headerhome.png" Color="#ddd" StretchMode="UniformToFill">
-                                <Scaling ux:Name="headerScaling" Factor="1.4" />
-                            </Image>
-                            <Text ux:Name="goodMorningText" Value="Wecome!" FontSize="32" Alignment="Center" Color="#fff" Opacity="0"/>
-                            <Circle  ux:Name="profile" Width="250" Height="250" Opacity="0">
-                                <ImageFill File="assets/images/logo.png" WrapMode="ClampToEdge"/>
-                               
-                                <Scaling ux:Name="profileScaling" Factor="0.1"/>
-                            </Circle>
-                            <Grid ux:Name="monthPanel" ColumnCount="3" Padding="20,0" Opacity="0">
-                                <Image File="assets/images/arrow.png" Width="20" Height="20" Alignment="Left"/>
-                                <Text Value="What now" Alignment="Center" Color="#fff"/>
-                                <Image File="assets/images/arrow.png" Width="20" Height="20" Alignment="Right">
-                                    <Rotation Degrees="180" />
-                                </Image>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                </Panel>
-            </Panel>
-            <BottomBarBackground Dock="Bottom" />
-        </DockPanel>
-
-        <WhileTrue ux:Name="loading">
-            <Change changeWidth.Value="true" DelayBack="0"/>
-            <Change loadCircle.Value="true" DelayBack="0"/>
-
-            <Change scaleAndFade.Value="true" Delay="2.5" DelayBack="0"/>
-            <Change showLoggedIn.Value="true" Delay="2.9" />
-        </WhileTrue>
-        <WhileTrue ux:Name="changeWidth">
-            <Change rectNormalScale.Width="60" Duration=".5" DurationBack="0" Easing="CircularInOut"/>
-        </WhileTrue>
-        <WhileTrue ux:Name="loadCircle">
-            <Change text.Opacity="0" Duration="0.2" DurationBack="0"/>
-            <Change loadingCircle.Opacity="1" Duration="0.3" Delay="0.2" DelayBack="0" DurationBack="0"/>
-            <Spin Target="loadingCircle" Frequency="2"/>
-            <Cycle Target="loadingCircle.LengthAngleDegrees" Low="30" High="300" Frequency="0.7" />
-        </WhileTrue>
-        <WhileTrue ux:Name="scaleAndFade">
-            <Change loadingCirclePanel.Opacity="0" Duration="0.1" />
-            <Change loadingButton.Opacity="1" Duration="0.01" />
-            <Change rectNormalScale.Opacity="0" Duration="0.01" />
-
-            <Scale Target="loadingButton" Factor="3" RelativeTo="SizeFactor" RelativeNode="transitionScaleGuide"
-                   Delay="0.01" Duration="0.7" Easing="ExponentialInOut" DurationBack="0" />
-        </WhileTrue>
-        <WhileTrue ux:Name="showLoggedIn">
-            <Change loggedInView.Opacity="1" Delay="0.1" Duration="0.65" DurationBack="0.35" DelayBack="0.2" Easing="CubicInOut"/>
-            <Change plusButton.Opacity="1" Delay="0.1" Duration="0.65" DurationBack="0.7" DelayBack="0.3" Easing="CubicInOut"/>
-
-            <Change goodMorningText.Opacity="1" Duration="0.3" Delay="0.3"/>
-            <Change monthPanel.Opacity="1" Duration="0.3" Delay="0.3"/>
-
-            <Change showPlusButton.Value="true" />
-            <RaiseUserEvent EventName="ToggleLoggedIn" />
-
-            <Change profile.Opacity="1" Delay="0.7" Duration="0.1" DurationBack="0.2" DelayBack="0"/>
-            <Change profileScaling.Factor="1" Delay="0.7" Duration="0.4" Easing="CircularInOut"/>
-            <Change loggedInView.IsEnabled="true" />
-            <Change plusButton.IsEnabled="true" />
-        </WhileTrue>
-
-        <Grid ux:Name="loggedOutView" Rows="1.5*,auto,1*" Padding="40,0">
-            <WhileKeyboardVisible>
-                <Move Target="mark" Y="-200" Duration=".6" Easing="ExponentialInOut"/>
-                <Move Target="loginArea" Y="-200" Duration=".6" Easing="ExponentialInOut"/>
-            </WhileKeyboardVisible>
-
-            <Rectangle Layer="Background">
-                <ImageFill File="assets/images/bglogin.png" WrapMode="ClampToEdge"/>
-            </Rectangle>
-
-            <Panel Row="2" Width="150" Height="60">
-                <Text ux:Name="text" Alignment="Center" Value="Sign in" FontSize="18" Color="#fff"/>
-                <Panel ux:Name="loadingCirclePanel">
-                    <Circle ux:Name="loadingCircle" Width="70%" Height="70%" Opacity="0" StartAngleDegrees="0" LengthAngleDegrees="90">
-                        <Stroke Width="1" Brush="#fff" />
-                    </Circle>
-                </Panel>
-                <Clicked>
-                    <Toggle Target="loading" />
-                </Clicked>
-                <Rectangle ux:Name="rectNormalScale" CornerRadius="30" Color="#FF3366" Width="300" Height="60"/>
-                <Circle ux:Name="loadingButton" Opacity="0" Alignment="Center" Layer="Background" Width="240" Height="240" Color="#FF3366">
-                    <Scaling Factor="0.25" />
-                </Circle>
-            </Panel>
-
-            <Image ux:Name="mark" Row="0" File="assets/images/logo.png" />
-
-            <Grid ux:Name="loginArea" Row="1" Padding="0,20" RowCount="2" Columns="auto,1*" Height="160" MaxWidth="400">
-                <Image     Row="0" Column="0" File="assets/icons/user_icon.png" Width="20" Height="20" Margin="10,0,30,0" Alignment="Left"/>
-                <TextInput Row="0" Column="1" PlaceholderText="Username" PlaceholderColor="#999" TextColor="#fff" CaretColor="#fff" />
-                <Rectangle Row="0" Column="0" Alignment="Bottom" ColumnSpan="2" Height="1" Color="#fff"/>
-
-                <Image     Row="1" Column="0" File="assets/icons/password_icon.png" Width="20" Height="20" Margin="10,0,30,0" Alignment="Left"/>
-                <TextInput Row="1" Column="1" PlaceholderText="Password" PlaceholderColor="#999" TextColor="#fff" CaretColor="#fff" IsPassword="true"/>
-                <Rectangle Row="1" Column="0" Alignment="Bottom" ColumnSpan="2" Height="1" Color="#fff"/>
-            </Grid>
-        </Grid>
-    </Panel>
-
+            <Clicked>
+            <Text Alignment="VerticalCenter">boop</Text>
+        </Clicked>
         </Page>
 
-        <Page ux:Template="signup">
-            <Text Alignment="Center">Sign Up Page.</Text>
-            
-        </Page>
+        <Page ux:Template="signup"></Page>
 
-        <Page ux:Template="home">
-            <Text Alignment="Center">home page</Text>
-        </Page>
+        <Page ux:Template="home"></Page>
 
 	    <Page ux:Template="scanner">
-            <Text Alignment="Center">Scanner.</Text>
+         
+
         </Page>
 
-        <Page ux:Template="myrack">
-            <Text Alignment="Center">My Rack.</Text>
-        </Page>
+        <Page ux:Template="myrack"></Page>
     
     </Navigator>
 
