@@ -11,8 +11,5 @@ public partial class SplashPage: Fuse.Controls.Page
     }
     void InitializeUX()
     {
-        var temp = new global::Fuse.Controls.Text();
-        temp.Value = "Splash. Splash. Splash.";
-        this.Children.Add(temp);
     }
 }
